@@ -4,12 +4,13 @@ pygame.init()
 
 screen = pygame.display.set_mode((1512, 982), vsync=1)
 
-rect_x = 100
-rect_y = 100
-rect_width = 100
-rect_height = 50
-rect_color = (255, 0, 0)  # Red
-rect_speed = 5
+class MyGameChar:
+    x = 100 #sets x position on screen
+    y = 100 #sets y position on screen
+    width = 100
+    height = 50
+    color = (255, 0, 0)  
+    speed = 20
 
 running = True
 while running:
@@ -20,27 +21,32 @@ while running:
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_UP]:
-        rect_y -= rect_speed
+        MyGameChar.y -= MyGameChar.speed
     if keys[pygame.K_DOWN]:
-        rect_y += rect_speed
+        MyGameChar.y += MyGameChar.speed
     if keys[pygame.K_LEFT]:
-        rect_x -= rect_speed
+        MyGameChar.x -= MyGameChar.speed
     if keys[pygame.K_RIGHT]:
-        rect_x += rect_speed
+        MyGameChar.x += MyGameChar.speed
+    if keys[pygame.K_w]:
+        MyGameChar.width
 
 
-    if rect_x < 0:
-        rect_x = 0
-    if rect_x > screen.get_width() - rect_width:
-        rect_x = screen.get_width() - rect_width
-    if rect_y < 0:
-        rect_y = 0
-    if rect_y > screen.get_height() - rect_height-100:
-        rect_y = screen.get_height() - rect_height-100
+    if MyGameChar.x < 0:
+       MyGameChar.x = 0
+    if MyGameChar.x > screen.get_width() - MyGameChar.width:
+        MyGameChar.x = screen.get_width() - MyGameChar.width
+    if MyGameChar.y < 0:
+        MyGameChar.y = 0
+    if MyGameChar.y > screen.get_height() - MyGameChar.height-100:
+        f = open("latest_moves.txt", "w")
+        f.write("bottom border was hit!\n")
+        f.close()
+        MyGameChar.y = screen.get_height() - MyGameChar.height-100
 
 
     screen.fill((255, 255, 255)) 
-    pygame.draw.rect(screen, rect_color, (rect_x, rect_y, rect_width, rect_height))
+    pygame.draw.rect(screen, MyGameChar.color, (MyGameChar.x, MyGameChar.y, MyGameChar.width, MyGameChar.height))
 
     pygame.display.flip()
 
