@@ -15,7 +15,7 @@ dis_width = 600
 dis_height = 400
  
 dis = pygame.display.set_mode((dis_width, dis_height))
-pygame.display.set_caption('Snake Game by Edureka')
+pygame.display.set_caption('Snake Game by Tanner Davison')
  
 clock = pygame.time.Clock()
  
@@ -90,7 +90,22 @@ def gameLoop():
                 elif event.key == pygame.K_DOWN:
                     y1_change = snake_block
                     x1_change = 0
- 
+                
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_a:
+                    x1_change = -snake_block
+                    y1_change = 0
+                elif event.key == pygame.K_d:
+                    x1_change = snake_block
+                    y1_change = 0
+                elif event.key == pygame.K_w:
+                    y1_change = -snake_block
+                    x1_change = 0
+                elif event.key == pygame.K_s:
+                    y1_change = snake_block
+                    x1_change = 0
+                
+                
         if x1 >= dis_width or x1 < 0 or y1 >= dis_height or y1 < 0:
             game_close = True
         x1 += x1_change
